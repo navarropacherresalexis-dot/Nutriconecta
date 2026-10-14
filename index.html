@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriConecta</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f9f1;
+  color:#26382c;
+}
+header{
+  background:#246b45;
+  color:white;
+  padding:24px 16px;
+  text-align:center;
+}
+header h1{margin:0;font-size:32px}
+header p{margin-bottom:0}
+nav{
+  background:#194d33;
+  padding:12px;
+  text-align:center;
+}
+nav a{
+  color:white;
+  margin:0 10px;
+  text-decoration:none;
+  font-weight:bold;
+}
+main{max-width:850px;margin:auto;padding:18px}
+section{
+  background:white;
+  border-radius:16px;
+  padding:20px;
+  margin:18px 0;
+  box-shadow:0 3px 12px #0000000d;
+}
+h2{color:#246b45}
+.hero{
+  background:#e0f2d9;
+  text-align:center;
+  padding:28px 20px;
+  border-radius:16px;
+}
+.hero .emoji{font-size:55px}
+button{
+  background:#246b45;
+  color:white;
+  border:0;
+  padding:12px 18px;
+  border-radius:9px;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:12px;
+}
+button:hover{background:#194d33}
+select{
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  border:1px solid #b6c8b7;
+  border-radius:8px;
+  font-size:16px;
+}
+.resultado{
+  background:#e7f5e7;
+  border-radius:10px;
+  padding:15px;
+  margin-top:15px;
+  display:none;
+  line-height:1.6;
+}
+.tip{
+  background:#f0f7e9;
+  padding:13px;
+  border-radius:10px;
+  margin:10px 0;
+}
+footer{
+  background:#194d33;
+  color:white;
+  text-align:center;
+  padding:20px;
+  margin-top:25px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🥑 NutriConecta</h1>
+  <p>Pequeños cambios, grandes hábitos</p>
+</header>
+
+<nav>
+  <a href="#problema">El problema</a>
+  <a href="#test">Mi alimentación</a>
+  <a href="#consejos">Consejos</a>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="emoji">🍎🥗💧</div>
+    <h2>¡Tu bienestar empieza con lo que eliges!</h2>
+    <p>Descubre cómo mejorar tus hábitos alimenticios mientras estudias.</p>
+    <a href="#test"><button>Descubrir mis hábitos</button></a>
+  </div>
+
+  <section id="problema">
+    <h2>⚠️ ¿Qué está pasando?</h2>
+    <p>Muchos estudiantes se saltan comidas, consumen demasiadas golosinas o bebidas azucaradas y no siempre eligen alimentos variados.</p>
+    <p>Estos hábitos pueden afectar la energía, la concentración y el bienestar durante las clases.</p>
+  </section>
+
+  <section id="test">
+    <h2>🔎 Mi semáforo alimenticio</h2>
+    <p>Responde estas preguntas para recibir recomendaciones según tus hábitos. No hay respuestas para juzgarte: ¡siempre puedes mejorar!</p>
+
+    <label for="desayuno"><b>1. ¿Con qué frecuencia desayunas antes de estudiar?</b></label>
+    <select id="desayuno">
+      <option value="">Selecciona una respuesta</option>
+      <option value="2">Todos o casi todos los días</option>
+      <option value="1">Algunos días</option>
+      <option value="0">Casi nunca</option>
+    </select>
+
+    <label for="agua"><b>2. ¿Qué tan seguido tomas agua durante el día?</b></label>
+    <select id="agua">
+      <option value="">Selecciona una respuesta</option>
+      <option value="2">Con frecuencia</option>
+      <option value="1">A veces</option>
+      <option value="0">Casi nunca</option>
+    </select>
+
+    <label for="comidas"><b>3. ¿Con qué frecuencia te saltas comidas?</b></label>
+    <select id="comidas">
+      <option value="">Selecciona una respuesta</option>
+      <option value="2">Casi nunca</option>
+      <option value="1">Algunos días</option>
+      <option value="0">Con frecuencia</option>
+    </select>
+
+    <label for="variedad"><b>4. ¿Qué tan variados son tus alimentos?</b></label>
+    <select id="variedad">
+      <option value="">Selecciona una respuesta</option>
+      <option value="2">Como alimentos variados</option>
+      <option value="1">A veces varío mis comidas</option>
+      <option value="0">Suelo comer lo mismo</option>
+    </select>
+
+    <button onclick="evaluar()">Ver mis recomendaciones</button>
+    <div id="resultado" class="resultado" aria-live="polite"></div>
+  </section>
+
+  <section id="consejos">
+    <h2>💡 Consejos para tu vida escolar</h2>
+    <div class="tip">🍳 <b>No te saltes las comidas:</b> organiza tus horarios para alimentarte durante la jornada escolar.</div>
+    <div class="tip">🍌 <b>Elige opciones prácticas:</b> una fruta, un huevo o un sándwich casero pueden ser alternativas útiles.</div>
+    <div class="tip">💧 <b>Lleva agua:</b> ten una botella a mano y bebe regularmente.</div>
+    <div class="tip">🥗 <b>Busca variedad:</b> combina alimentos como frutas, verduras, menestras, huevos y otros alimentos nutritivos.</div>
+    <div class="tip">🤝 <b>Comparte el cambio:</b> anima a tus compañeros y familia a proponer opciones saludables en el colegio.</div>
+  </section>
+
+  <section>
+    <h2>🌱 Nuestro reto saludable</h2>
+    <p>Durante esta semana, elige un hábito que quieras mejorar y ponlo en práctica. ¡Los pequeños pasos también cuentan!</p>
+    <button onclick="reto()">Elegir mi reto</button>
+    <div id="reto" class="resultado" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer>
+  <p><b>NutriConecta</b> | Aprende, elige y comparte.</p>
+  <p>Proyecto escolar para promover una alimentación saludable.</p>
+</footer>
+
+<script>
+function evaluar(){
+  const ids=["desayuno","agua","comidas","variedad"];
+  for(const id of ids){
+    if(document.getElementById(id).value===""){
+      alert("Responde las cuatro preguntas para recibir tus recomendaciones.");
+      return;
+    }
+  }
+  let puntos=0;
+  ids.forEach(id=>puntos+=Number(document.getElementById(id).value));
+  let titulo,texto;
+  if(puntos>=7){
+    titulo="🟢 ¡Vas por buen camino!";
+    texto="Tus respuestas muestran varios hábitos positivos. Sigue cuidando tus horarios, toma agua y busca variedad en tus comidas.";
+  }else if(puntos>=4){
+    titulo="🟡 ¡Puedes seguir mejorando!";
+    texto="Ya tienes algunos hábitos positivos. Elige un cambio sencillo, como llevar agua o planificar una comida, y practícalo esta semana.";
+  }else{
+    titulo="🟠 ¡Empecemos poco a poco!";
+    texto="Puedes comenzar con un pequeño cambio: organiza tus horarios de comida, lleva agua o busca una opción variada que esté a tu alcance. Si te cuesta alimentarte bien, pide apoyo a un adulto de confianza.";
+  }
+  const r=document.getElementById("resultado");
+  r.style.display="block";
+  r.innerHTML="<h3>"+titulo+"</h3><p>"+texto+"</p><small>Esta orientación es educativa y no constituye una evaluación médica.</small>";
+}
+function reto(){
+  const retos=[
+    "Lleva agua al colegio durante toda la semana.",
+    "Organiza con anticipación una opción práctica para tu refrigerio.",
+    "Incluye una fruta o verdura cuando esté disponible.",
+    "Conversa con tu familia sobre una comida variada y accesible.",
+    "Propón a tus compañeros una idea para mejorar las opciones del quiosco escolar."
+  ];
+  const elegido=retos[Math.floor(Math.random()*retos.length)];
+  const r=document.getElementById("reto");
+  r.style.display="block";
+  r.innerHTML="<h3>🎯 Tu reto de la semana</h3><p>"+elegido+"</p>";
+}
+</script>
+</body>
+</html>
