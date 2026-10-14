@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,101 +5,201 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NutriConecta</title>
 <style>
-*{box-sizing:border-box}
+:root {
+  --bg: #f5f9f1;
+  --text: #26382c;
+  --card-bg: #ffffff;
+  --header-bg: #246b45;
+  --header-nav: #194d33;
+  --hero-bg: #e0f2d9;
+  --accent: #246b45;
+  --accent-hover: #194d33;
+  --tip-bg: #f0f7e9;
+  --resultado-bg: #e7f5e7;
+  --border: #b6c8b7;
+  --shadow: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg: #121d16;
+  --text: #e2ede5;
+  --card-bg: #1c2b20;
+  --header-bg: #153e28;
+  --header-nav: #0d291a;
+  --hero-bg: #1a3324;
+  --accent: #329460;
+  --accent-hover: #287a4f;
+  --tip-bg: #223628;
+  --resultado-bg: #203c2a;
+  --border: #2d4734;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+*{box-sizing:border-box; transition: background-color 0.3s ease, color 0.3s ease;}
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:#f5f9f1;
-  color:#26382c;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 header{
-  background:#246b45;
-  color:white;
-  padding:24px 16px;
-  text-align:center;
+  background: var(--header-bg);
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+  position: relative;
 }
 header h1{margin:0;font-size:32px}
 header p{margin-bottom:0}
+
+.theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
 nav{
-  background:#194d33;
-  padding:12px;
-  text-align:center;
+  background: var(--header-nav);
+  padding: 12px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 nav a{
-  color:white;
-  margin:0 10px;
-  text-decoration:none;
-  font-weight:bold;
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
 }
+nav a:hover{ text-decoration: underline; }
+
 main{max-width:850px;margin:auto;padding:18px}
 section{
-  background:white;
-  border-radius:16px;
-  padding:20px;
-  margin:18px 0;
-  box-shadow:0 3px 12px #0000000d;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 22px;
+  margin: 20px 0;
+  box-shadow: 0 4px 15px var(--shadow);
+  border: 1px solid var(--border);
 }
-h2{color:#246b45}
+h2{color: var(--accent); margin-top: 0;}
+
 .hero{
-  background:#e0f2d9;
-  text-align:center;
-  padding:28px 20px;
-  border-radius:16px;
+  background: var(--hero-bg);
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
 }
 .hero .emoji{font-size:55px}
-button{
-  background:#246b45;
-  color:white;
-  border:0;
-  padding:12px 18px;
-  border-radius:9px;
-  font-size:16px;
-  cursor:pointer;
-  margin-top:12px;
+
+button, .btn-action{
+  background: var(--accent);
+  color: white;
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 9px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: transform 0.1s ease, background 0.2s ease;
 }
-button:hover{background:#194d33}
-select{
-  width:100%;
-  padding:12px;
-  margin-top:8px;
-  border:1px solid #b6c8b7;
-  border-radius:8px;
-  font-size:16px;
+button:hover, .btn-action:hover{
+  background: var(--accent-hover);
+  transform: translateY(-2px);
 }
+button:active{ transform: translateY(0); }
+
+select, input[type="number"], input[type="text"], textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  background: var(--card-bg);
+  color: var(--text);
+}
+
 .resultado{
-  background:#e7f5e7;
-  border-radius:10px;
-  padding:15px;
-  margin-top:15px;
-  display:none;
-  line-height:1.6;
+  background: var(--resultado-bg);
+  border-radius: 10px;
+  padding: 18px;
+  margin-top: 15px;
+  display: none;
+  line-height: 1.6;
+  animation: fadeIn 0.4s ease-in-out;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .tip{
-  background:#f0f7e9;
-  padding:13px;
-  border-radius:10px;
-  margin:10px 0;
+  background: var(--tip-bg);
+  padding: 14px;
+  border-radius: 10px;
+  margin: 10px 0;
+  border-left: 4px solid var(--accent);
 }
+
+.grid-recetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.receta-card {
+  background: var(--tip-bg);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.receta-card h3 { margin-top: 0; color: var(--accent); font-size: 18px; }
+
+.comentario-item {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+}
+.comentario-item:last-child { border-bottom: none; }
+.comentario-autor { font-weight: bold; color: var(--accent); }
+
 footer{
-  background:#194d33;
-  color:white;
-  text-align:center;
-  padding:20px;
-  margin-top:25px;
+  background: var(--header-nav);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
 }
 </style>
 </head>
 <body>
 
 <header>
+  <button class="theme-toggle" onclick="toggleTheme()" id="btn-theme">🌙 Modo Oscuro</button>
   <h1>🥑 NutriConecta</h1>
   <p>Pequeños cambios, grandes hábitos</p>
 </header>
 
 <nav>
   <a href="#problema">El problema</a>
-  <a href="#test">Mi alimentación</a>
-  <a href="#consejos">Consejos</a>
+  <a href="#test">Semáforo</a>
+  <a href="#agua-calc">Agua</a>
+  <a href="#recetas">Recetas</a>
+  <a href="#muro">Muro</a>
 </nav>
 
 <main>
@@ -119,7 +218,7 @@ footer{
 
   <section id="test">
     <h2>🔎 Mi semáforo alimenticio</h2>
-    <p>Responde estas preguntas para recibir recomendaciones según tus hábitos. No hay respuestas para juzgarte: ¡siempre puedes mejorar!</p>
+    <p>Responde estas preguntas para recibir recomendaciones según tus hábitos:</p>
 
     <label for="desayuno"><b>1. ¿Con qué frecuencia desayunas antes de estudiar?</b></label>
     <select id="desayuno">
@@ -157,20 +256,68 @@ footer{
     <div id="resultado" class="resultado" aria-live="polite"></div>
   </section>
 
+  <section id="agua-calc">
+    <h2>💧 Calculadora de Agua</h2>
+    <p>Ingresa tu peso en kilos para saber cuánta agua necesitas aproximadamente al día:</p>
+    <label for="peso"><b>Tu peso (kg):</b></label>
+    <input type="number" id="peso" placeholder="Ej: 55" min="20" max="150">
+    <button onclick="calcularAgua()">Calcular agua diaria</button>
+    <div id="resultado-agua" class="resultado" aria-live="polite"></div>
+  </section>
+
+  <section id="recetas">
+    <h2>🥪 Recetario Exprés para el Colegio</h2>
+    <p>Opciones nutritivas, sencillas y económicas para llevar de refrigerio:</p>
+    
+    <div class="grid-recetas">
+      <div class="receta-card">
+        <h3>🍳 Pan con Huevo y Palta</h3>
+        <p><b>Preparación:</b> Un pan integral o de molde con 1 huevo sancochado laminado y láminas de palta o un toque de limón.</p>
+        <small>⏱️ Tiempo: 5 min</small>
+      </div>
+      <div class="receta-card">
+        <h3>🍌 Snack de Plátano y Frutos Secos</h3>
+        <p><b>Preparación:</b> 1 plátano picado o entero acompañado de un puñado de maní o frutos secos de tu preferencia.</p>
+        <small>⏱️ Tiempo: 2 min</small>
+      </div>
+      <div class="receta-card">
+        <h3>🧀 Triángulos de Queso y Fruta</h3>
+        <p><b>Preparación:</b> Trozos de queso fresco bajo en sal acompañados de manzana o uvas lavadas.</p>
+        <small>⏱️ Tiempo: 3 min</small>
+      </div>
+    </div>
+  </section>
+
   <section id="consejos">
     <h2>💡 Consejos para tu vida escolar</h2>
     <div class="tip">🍳 <b>No te saltes las comidas:</b> organiza tus horarios para alimentarte durante la jornada escolar.</div>
     <div class="tip">🍌 <b>Elige opciones prácticas:</b> una fruta, un huevo o un sándwich casero pueden ser alternativas útiles.</div>
     <div class="tip">💧 <b>Lleva agua:</b> ten una botella a mano y bebe regularmente.</div>
-    <div class="tip">🥗 <b>Busca variedad:</b> combina alimentos como frutas, verduras, menestras, huevos y otros alimentos nutritivos.</div>
-    <div class="tip">🤝 <b>Comparte el cambio:</b> anima a tus compañeros y familia a proponer opciones saludables en el colegio.</div>
+    <div class="tip">🥗 <b>Busca variedad:</b> combina alimentos como frutas, verduras, menestras y huevos.</div>
+    <div class="tip">🤝 <b>Comparte el cambio:</b> anima a tus compañeros a proponer opciones saludables en el colegio.</div>
   </section>
 
   <section>
     <h2>🌱 Nuestro reto saludable</h2>
-    <p>Durante esta semana, elige un hábito que quieras mejorar y ponlo en práctica. ¡Los pequeños pasos también cuentan!</p>
+    <p>Durante esta semana, elige un hábito que quieras mejorar y ponlo en práctica.</p>
     <button onclick="reto()">Elegir mi reto</button>
     <div id="reto" class="resultado" aria-live="polite"></div>
+  </section>
+
+  <section id="muro">
+    <h2>💬 Muro de Compromisos</h2>
+    <p>¡Deja tu compromiso saludable o experiencia para motivar a tus compañeros!</p>
+    
+    <input type="text" id="nombre-usuario" placeholder="Tu nombre o apodo">
+    <textarea id="texto-comentario" rows="3" placeholder="Ej: Me comprometo a llevar mi tomatodo con agua todos los días."></textarea>
+    <button onclick="agregarComentario()">Publicar compromiso</button>
+
+    <div id="lista-comentarios" style="margin-top:20px;">
+      <div class="comentario-item">
+        <span class="comentario-autor">Mateo (5.° de sec.):</span>
+        <p>¡Empecé a llevar manzana y huevo sancochado como refrigerio y me siento con más energía en las últimas horas de clase!</p>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -180,6 +327,7 @@ footer{
 </footer>
 
 <script>
+// Test del Semáforo
 function evaluar(){
   const ids=["desayuno","agua","comidas","variedad"];
   for(const id of ids){
@@ -199,12 +347,14 @@ function evaluar(){
     texto="Ya tienes algunos hábitos positivos. Elige un cambio sencillo, como llevar agua o planificar una comida, y practícalo esta semana.";
   }else{
     titulo="🟠 ¡Empecemos poco a poco!";
-    texto="Puedes comenzar con un pequeño cambio: organiza tus horarios de comida, lleva agua o busca una opción variada que esté a tu alcance. Si te cuesta alimentarte bien, pide apoyo a un adulto de confianza.";
+    texto="Puedes comenzar con un pequeño cambio: organiza tus horarios de comida, lleva agua o busca una opción variada. Pide apoyo a tus padres o tutores si lo necesitas.";
   }
   const r=document.getElementById("resultado");
   r.style.display="block";
   r.innerHTML="<h3>"+titulo+"</h3><p>"+texto+"</p><small>Esta orientación es educativa y no constituye una evaluación médica.</small>";
 }
+
+// Reto Aleatorio
 function reto(){
   const retos=[
     "Lleva agua al colegio durante toda la semana.",
@@ -217,6 +367,58 @@ function reto(){
   const r=document.getElementById("reto");
   r.style.display="block";
   r.innerHTML="<h3>🎯 Tu reto de la semana</h3><p>"+elegido+"</p>";
+}
+
+// Calculadora de Agua
+function calcularAgua(){
+  const peso = parseFloat(document.getElementById("peso").value);
+  const r = document.getElementById("resultado-agua");
+  if(!peso || peso <= 0){
+    alert("Por favor ingresa un peso válido en kilos.");
+    return;
+  }
+  const ml = peso * 35; // Aproximadamente 35ml por kg de peso
+  const litros = (ml / 1000).toFixed(1);
+  const vasos = Math.round(ml / 250); // Vasos de 250ml
+
+  r.style.display = "block";
+  r.innerHTML = `<h3>💧 Tu consumo diario recomendado:</h3>
+                 <p>Debes tomar aproximadamente <b>${litros} litros</b> de agua al día (alrededor de <b>${vasos} vasos</b> de 250 ml).</p>
+                 <small>Recuerda ajustar esto si realizas mucha actividad física o hace mucho calor.</small>`;
+}
+
+// Modo Oscuro / Claro
+function toggleTheme(){
+  const body = document.body;
+  const btn = document.getElementById("btn-theme");
+  if(body.getAttribute("data-theme") === "dark"){
+    body.removeAttribute("data-theme");
+    btn.innerHTML = "🌙 Modo Oscuro";
+  } else {
+    body.setAttribute("data-theme", "dark");
+    btn.innerHTML = "☀️ Modo Claro";
+  }
+}
+
+// Muro de Comentarios
+function agregarComentario(){
+  const nombre = document.getElementById("nombre-usuario").value.trim();
+  const texto = document.getElementById("texto-comentario").value.trim();
+  
+  if(!nombre || !texto){
+    alert("Por favor escribe tu nombre y tu compromiso.");
+    return;
+  }
+
+  const contenedor = document.getElementById("lista-comentarios");
+  const nuevoDiv = document.createElement("div");
+  nuevoDiv.className = "comentario-item";
+  nuevoDiv.innerHTML = `<span class="comentario-autor">${nombre}:</span><p>${texto}</p>`;
+  
+  contenedor.prepend(nuevoDiv);
+
+  document.getElementById("nombre-usuario").value = "";
+  document.getElementById("texto-comentario").value = "";
 }
 </script>
 </body>
